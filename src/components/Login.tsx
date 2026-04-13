@@ -26,7 +26,7 @@ function Login({ onLogin }: LoginProps) {
     }
     setLoading(true)
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: registerData.email,
         password: registerData.password,
         options: {
