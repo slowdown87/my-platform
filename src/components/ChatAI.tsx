@@ -38,19 +38,6 @@ export default function ChatAI() {
 
       const data = await response.json();
 
-      // 调试：把完整返回显示在页面上
-      if (!data.choices || !data.choices[0]) {
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant",
-            content: `🔍 调试信息：${JSON.stringify(data)}`,
-          },
-        ]);
-        setLoading(false);
-        return;
-      }
-
       if (data.choices && data.choices[0]) {
         const assistantMessage: Message = {
           role: "assistant",
@@ -58,7 +45,7 @@ export default function ChatAI() {
         };
         setMessages((prev) => [...prev, assistantMessage]);
       } else {
-        throw new Error(data.error?.message || "AI 响应异常");
+        throw new Error(data.error?.message || "AI 响应异常，请稍后重试");
       }
     } catch (error: any) {
       setMessages((prev) => [
