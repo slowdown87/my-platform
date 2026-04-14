@@ -1,5 +1,5 @@
-export default async function handler(event) {
-  if (event.httpMethod !== "POST") {
+export default async (request, context) => {
+  if (request.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
       status: 405,
       headers: { "Content-Type": "application/json" },
@@ -7,7 +7,7 @@ export default async function handler(event) {
   }
 
   try {
-    const { messages } = JSON.parse(event.body);
+    const { messages } = await request.json();
 
     const response = await fetch(
       "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
@@ -36,4 +36,4 @@ export default async function handler(event) {
       headers: { "Content-Type": "application/json" },
     });
   }
-}
+};
