@@ -11,6 +11,47 @@ export default function ChatAI() {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // 检测是否在 GitHub Pages 上
+  const isGitHubPages = window.location.hostname.includes("github.io");
+
+  // 如果在 GitHub Pages，显示提示
+  if (isGitHubPages) {
+    return (
+      <div
+        style={{
+          height: "calc(100vh - 120px)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#f5f5f5",
+          borderRadius: "12px",
+          padding: "40px",
+          textAlign: "center",
+        }}
+      >
+        <div style={{ fontSize: "64px", marginBottom: "24px" }}>🤖</div>
+        <h2 style={{ marginBottom: "16px", color: "#333" }}>AI 对话功能</h2>
+        <p style={{ color: "#666", marginBottom: "24px", maxWidth: "400px" }}>
+          GitHub Pages 不支持服务器端功能，AI 对话在此不可用。
+        </p>
+        <a
+          href="https://my-platform87.netlify.app"
+          style={{
+            padding: "12px 24px",
+            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+            color: "white",
+            borderRadius: "8px",
+            textDecoration: "none",
+            fontWeight: "bold",
+          }}
+        >
+          前往主站使用 AI 对话 →
+        </a>
+      </div>
+    );
+  }
+
   // 自动滚动到底部
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
