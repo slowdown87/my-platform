@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 
+// AI 服务配置（修改这里就能切换模型）
+const AI_MODEL = "qwen-turbo";
+
 interface Message {
   role: "user" | "assistant";
   content: string;
@@ -74,6 +77,7 @@ export default function ChatAI() {
             role: m.role,
             content: m.content,
           })),
+          model: AI_MODEL,
         }),
       });
 
@@ -151,7 +155,7 @@ export default function ChatAI() {
             <div style={{ fontSize: "48px", marginBottom: "16px" }}>💬</div>
             <div>开始和 AI 聊天吧！</div>
             <div style={{ fontSize: "12px", marginTop: "8px" }}>
-              模型：qwen2.5-omni-7b
+              模型：{AI_MODEL}
             </div>
           </div>
         )}

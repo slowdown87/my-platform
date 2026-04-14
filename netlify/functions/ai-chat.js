@@ -7,7 +7,7 @@ export default async (request, context) => {
   }
 
   try {
-    const { messages } = await request.json();
+    const { messages, model } = await request.json();
 
     const response = await fetch(
       "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
@@ -18,7 +18,7 @@ export default async (request, context) => {
           Authorization: `Bearer ${process.env.BAILIAN_API_KEY}`,
         },
         body: JSON.stringify({
-          model: "qwen-turbo",
+          model: model || "qwen-turbo",
           messages: messages,
           enable_search: true, // 添加这一行，开启联网搜索
         }),
