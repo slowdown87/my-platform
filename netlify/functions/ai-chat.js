@@ -20,6 +20,7 @@ export default async (request, context) => {
         body: JSON.stringify({
           model: "qwen2.5-omni-7b",
           messages: messages,
+          enable_search: true, // 添加这一行，开启联网搜索
         }),
       },
     );
