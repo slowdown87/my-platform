@@ -18,7 +18,7 @@ export default async (request, context) => {
           Authorization: `Bearer ${process.env.BAILIAN_API_KEY}`,
         },
         body: JSON.stringify({
-          model: "qwen2.5-omni-7b",
+          model: "qwen-turbo",
           messages: messages,
           enable_search: true, // 添加这一行，开启联网搜索
         }),
