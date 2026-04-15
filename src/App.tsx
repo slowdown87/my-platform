@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import ChatAI from "./components/ChatAI";
 import "./App.css";
 import CodeEditor from "./components/CodeEditor";
+import Settings from "./components/Settings";
 
 function App() {
   const [user, setUser] = useState<any>(null);
