@@ -86,7 +86,7 @@ ${searchContext}
       throw new Error(data.error.message || "API 调用失败");
     }
 
-    // 第四步：在回答中附加搜索来源
+    // 第四步：如果 AI 回答中没有参考来源，则自动附加
     let finalContent = data.choices[0].message.content;
 
     if (
@@ -94,11 +94,16 @@ ${searchContext}
       searchResults.results &&
       searchResults.results.length > 0
     ) {
-      const sources = searchResults.results
-        .map((r) => `- [${r.title}](${r.url})`)
-        .join("\n");
-
-      finalContent += "\n\n---\n📚 **参考来源**：\n" + sources;
+      // 检查 AI 是否已经在回答中包含了来源
+      if (
+        !finalContent.includes("参考来源") &&
+        !finalContent.includes("来源")
+      ) {
+        const sources = searchResults.results
+          .map((r) => `- [${r.title}](${r.url})`)
+          .join("\n");
+        finalContent += "\n\n---\n📚 **参考来源**：\n" + sources;
+      }
     }
 
     // 返回修改后的结果
