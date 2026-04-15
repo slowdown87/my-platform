@@ -134,6 +134,9 @@ export default function ChatAI() {
         }}
       >
         🤖 AI 智能助手
+        <span style={{ fontSize: "12px", opacity: 0.8, marginLeft: "8px" }}>
+          🔍 联网搜索已开启
+        </span>
       </div>
 
       {/* 消息区域 */}
