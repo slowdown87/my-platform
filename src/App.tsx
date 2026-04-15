@@ -5,6 +5,7 @@ import ChatAI from "./components/ChatAI";
 import "./App.css";
 import CodeEditor from "./components/CodeEditor";
 import Settings from "./components/Settings";
+import Tutorial from "./components/Tutorial";
 
 function App() {
   const [user, setUser] = useState<any>(null);
@@ -53,6 +54,8 @@ function App() {
         return <CodeEditor />;
       case "settings":
         return <Settings />;
+      case "tutorial":
+        return <Tutorial />;
       default:
         return (
           <div className="home-content">
@@ -104,9 +107,12 @@ function App() {
           <span className="nav-icon">💻</span>
           <span className="nav-text">编程</span>
         </div>
-        <div className="nav-item">
-          <span className="nav-icon">📝</span>
-          <span className="nav-text">笔记</span>
+        <div
+          className={`nav-item ${currentPage === "tutorial" ? "active" : ""}`}
+          onClick={() => setCurrentPage("tutorial")}
+        >
+          <span className="nav-icon">📚</span>
+          <span className="nav-text">教程</span>
         </div>
         <div
           className={`nav-item ${currentPage === "settings" ? "active" : ""}`}
