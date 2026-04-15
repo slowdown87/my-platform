@@ -184,7 +184,15 @@ export default function ChatAI() {
                 boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
               }}
             >
-              <div style={{ whiteSpace: "pre-wrap" }}>{msg.content}</div>
+              <div
+                style={{
+                  whiteSpace: "pre-wrap",
+                  overflowWrap: "break-word",
+                  wordBreak: "break-word",
+                }}
+              >
+                {msg.content}
+              </div>
             </div>
           </div>
         ))}
