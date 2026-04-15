@@ -23,7 +23,7 @@ export default function ChatAI() {
     return (
       <div
         style={{
-          height: "calc(100vh - 120px)",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",

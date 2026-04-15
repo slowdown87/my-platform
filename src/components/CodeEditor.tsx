@@ -45,7 +45,7 @@ export default function CodeEditor() {
   return (
     <div
       style={{
-        height: "calc(100vh - 120px)",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
         background: "#f5f5f5",

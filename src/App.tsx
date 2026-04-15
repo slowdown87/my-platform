@@ -108,7 +108,10 @@ function App() {
           <span className="nav-icon">📝</span>
           <span className="nav-text">笔记</span>
         </div>
-        <div className="nav-item">
+        <div
+          className={`nav-item ${currentPage === "settings" ? "active" : ""}`}
+          onClick={() => setCurrentPage("settings")}
+        >
           <span className="nav-icon">⚙️</span>
           <span className="nav-text">设置</span>
         </div>
