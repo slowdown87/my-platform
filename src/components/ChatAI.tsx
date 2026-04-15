@@ -133,27 +133,9 @@ export default function ChatAI() {
           color: "white",
           fontSize: "18px",
           fontWeight: "bold",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
         }}
       >
-        <span>🤖 AI 智能助手</span>
-        <div
-          onClick={() => setSearchEnabled(!searchEnabled)}
-          style={{
-            fontSize: "13px",
-            opacity: 0.9,
-            cursor: "pointer",
-            padding: "4px 10px",
-            borderRadius: "12px",
-            background: searchEnabled
-              ? "rgba(255,255,255,0.25)"
-              : "rgba(255,255,255,0.1)",
-          }}
-        >
-          {searchEnabled ? "🔍 联网搜索 ON" : "🧠 纯AI模式"}
-        </div>
+        🤖 AI 智能助手
       </div>
 
       {/* 消息区域 */}
@@ -239,6 +221,45 @@ export default function ChatAI() {
           borderTop: "1px solid #eee",
         }}
       >
+        {/* 搜索开关 */}
+        <div
+          style={{
+            marginBottom: "10px",
+            display: "flex",
+            alignItems: "center",
+            gap: "8px",
+          }}
+        >
+          <div
+            onClick={() => setSearchEnabled(!searchEnabled)}
+            style={{
+              width: "40px",
+              height: "22px",
+              borderRadius: "11px",
+              background: searchEnabled ? "#667eea" : "#ccc",
+              position: "relative",
+              cursor: "pointer",
+              transition: "background 0.3s",
+            }}
+          >
+            <div
+              style={{
+                width: "18px",
+                height: "18px",
+                borderRadius: "50%",
+                background: "white",
+                position: "absolute",
+                top: "2px",
+                left: searchEnabled ? "20px" : "2px",
+                transition: "left 0.3s",
+                boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+              }}
+            />
+          </div>
+          <span style={{ fontSize: "13px", color: "#666" }}>
+            {searchEnabled ? "🔍 联网搜索" : "🧠 纯AI模式"}
+          </span>
+        </div>
         <div style={{ display: "flex", gap: "12px" }}>
           <textarea
             value={input}
