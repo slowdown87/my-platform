@@ -12,6 +12,7 @@ export default function ChatAI() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchEnabled, setSearchEnabled] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // 检测是否在 GitHub Pages 上
@@ -78,6 +79,7 @@ export default function ChatAI() {
             content: m.content,
           })),
           model: AI_MODEL,
+          search: searchEnabled, // 添加这一行
         }),
       });
 
@@ -131,12 +133,27 @@ export default function ChatAI() {
           color: "white",
           fontSize: "18px",
           fontWeight: "bold",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
-        🤖 AI 智能助手
-        <span style={{ fontSize: "12px", opacity: 0.8, marginLeft: "8px" }}>
-          🔍 联网搜索已开启
-        </span>
+        <span>🤖 AI 智能助手</span>
+        <div
+          onClick={() => setSearchEnabled(!searchEnabled)}
+          style={{
+            fontSize: "13px",
+            opacity: 0.9,
+            cursor: "pointer",
+            padding: "4px 10px",
+            borderRadius: "12px",
+            background: searchEnabled
+              ? "rgba(255,255,255,0.25)"
+              : "rgba(255,255,255,0.1)",
+          }}
+        >
+          {searchEnabled ? "🔍 联网搜索 ON" : "🧠 纯AI模式"}
+        </div>
       </div>
 
       {/* 消息区域 */}

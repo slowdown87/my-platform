@@ -7,7 +7,7 @@ export default async (request, context) => {
   }
 
   try {
-    const { messages, model } = await request.json();
+    const { messages, model, search } = await request.json();
 
     // 获取用户最新的问题
     const userMessage =
@@ -15,23 +15,24 @@ export default async (request, context) => {
 
     // 第一步：用 Tavily 搜索最新信息
     let searchResults = null;
-    try {
-      const tavilyResponse = await fetch("https://api.tavily.com/search", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          api_key: process.env.TAVILY_API_KEY,
-          query: userMessage,
-          max_results: 3,
-          include_answer: true,
-        }),
-      });
-      searchResults = await tavilyResponse.json();
-    } catch (searchError) {
-      // 搜索失败不影响对话，继续使用 AI 自身知识
-      console.log("搜索失败，使用 AI 自身知识:", searchError.message);
+    if (search !== false) {
+      try {
+        const tavilyResponse = await fetch("https://api.tavily.com/search", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            api_key: process.env.TAVILY_API_KEY,
+            query: userMessage,
+            max_results: 3,
+            include_answer: true,
+          }),
+        });
+        searchResults = await tavilyResponse.json();
+      } catch (searchError) {
+        // 搜索失败不影响对话，继续使用 AI 自身知识
+        console.log("搜索失败，使用 AI 自身知识:", searchError.message);
+      }
     }
-
     // 第二步：构建带搜索结果的提示词
     let enhancedMessages = [...messages];
 
